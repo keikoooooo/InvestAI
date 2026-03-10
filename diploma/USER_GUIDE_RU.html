@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Руководство пользователя InvestAI</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #dbe5f0;
+      --brand: #0b6bcb;
+      --brand-soft: #d9ecff;
+      --ok: #0f766e;
+      --warn: #b45309;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", "Segoe UI", "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 500px at 100% -5%, #cfe8ff 0%, transparent 60%),
+        radial-gradient(900px 420px at -10% 8%, #e4f4ea 0%, transparent 60%),
+        var(--bg);
+      line-height: 1.55;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      min-height: 100vh;
+      gap: 24px;
+      padding: 24px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 24px;
+      align-self: start;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0b6bcb, #0a9bd8);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+
+    .sub {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    nav a {
+      display: block;
+      text-decoration: none;
+      color: #1e293b;
+      padding: 9px 10px;
+      border-radius: 10px;
+      font-size: 14px;
+      border: 1px solid transparent;
+      transition: 160ms ease;
+    }
+
+    nav a:hover {
+      background: #f3f7fc;
+      border-color: var(--line);
+      transform: translateX(2px);
+    }
+
+    .content {
+      display: grid;
+      gap: 16px;
+      padding-bottom: 24px;
+    }
+
+    .hero {
+      background: linear-gradient(130deg, #0b6bcb 0%, #0a9bd8 45%, #0a7fc4 100%);
+      color: #fff;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      animation: rise .55s ease;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 5vw, 42px);
+      line-height: 1.12;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 780px;
+      color: rgba(255,255,255,.92);
+      font-size: 17px;
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      animation: rise .55s ease;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 23px;
+      letter-spacing: .2px;
+    }
+
+    h3 {
+      margin: 18px 0 8px;
+      font-size: 18px;
+    }
+
+    p { margin: 0 0 10px; }
+    ul, ol { margin: 8px 0 10px 22px; padding: 0; }
+    li { margin: 5px 0; }
+
+    code {
+      font-family: "JetBrains Mono", "Consolas", monospace;
+      background: #eef4fb;
+      border: 1px solid #d8e4f1;
+      border-radius: 6px;
+      padding: 1px 6px;
+      font-size: .92em;
+    }
+
+    .note {
+      border-left: 4px solid var(--warn);
+      background: #fff9ed;
+      padding: 12px 14px;
+      border-radius: 10px;
+      color: #78350f;
+    }
+
+    .ok {
+      border-left: 4px solid var(--ok);
+      background: #ecfeff;
+      padding: 12px 14px;
+      border-radius: 10px;
+      color: #134e4a;
+    }
+
+    .shot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin: 12px 0 18px;
+    }
+
+    .shot {
+      border: 2px dashed #9fc5ea;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #f7fbff 0%, #eef6ff 100%);
+      min-height: 150px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      text-align: center;
+    }
+
+    .shot b { color: #114c86; font-size: 14px; }
+    .shot span { color: #4a6581; font-size: 13px; }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 8px;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 1040px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      nav {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <a class="logo" href="#top">
+        <span class="logo-badge">↗</span>
+        <span>InvestAI Guide</span>
+      </a>
+      <p class="sub">Руководство для пользователя</p>
+      <nav>
+        <a href="#about">О приложении</a>
+        <a href="#start">С чего начать</a>
+        <a href="#screens">Основные экраны</a>
+        <a href="#flow">Рекомендуемый сценарий</a>
+        <a href="#tips">Полезные советы</a>
+        <a href="#faq">Частые вопросы</a>
+      </nav>
+    </aside>
+
+    <main class="content" id="top">
+      <header class="hero">
+        <h1>Руководство пользователя InvestAI</h1>
+        <p>Краткая инструкция по работе в приложении: как войти, как пользоваться разделами и где смотреть ключевую информацию.</p>
+      </header>
+
+      <section id="about">
+        <h2>О приложении</h2>
+        <p>InvestAI помогает смотреть состояние портфеля, анализировать отдельные активы, следить за рынком и получать AI-подсказки.</p>
+        <ul>
+          <li><b>Панель управления</b> — общая картина по портфелю.</li>
+          <li><b>Портфель</b> — все ваши активы и результаты.</li>
+          <li><b>Обзор рынка</b> — индексы, лидеры роста и падения.</li>
+          <li><b>AI-ассистент</b> — ответы на вопросы по портфелю и рынку.</li>
+          <li><b>Настройки</b> — персональные параметры и уведомления.</li>
+        </ul>
+      </section>
+
+      <section id="start">
+        <h2>С чего начать</h2>
+        <ol>
+          <li>Откройте приложение и войдите в аккаунт.</li>
+          <li>Если входите впервые, пройдите короткий онбординг.</li>
+          <li>Проверьте основные метрики на панели управления.</li>
+          <li>Откройте раздел «Портфель» и посмотрите активы.</li>
+          <li>При необходимости задайте вопрос AI-ассистенту.</li>
+        </ol>
+        <div class="ok">Рекомендуется начать с онбординга: это улучшает персональные подсказки в приложении.</div>
+      </section>
+
+      <section id="screens">
+        <h2>Основные экраны</h2>
+
+        <h3>1) Вход и регистрация</h3>
+        <p>На стартовом экране можно войти в аккаунт или создать новый.</p>
+        <div class="shot-grid">
+          <div class="shot"><b>Скрин: экран входа</b><span>Добавьте скрин страницы авторизации</span></div>
+          <div class="shot"><b>Скрин: экран регистрации</b><span>Добавьте скрин формы регистрации</span></div>
+        </div>
+
+        <h3>2) Онбординг</h3>
+        <p>Заполняется риск-профиль, цели и стартовые параметры.</p>
+        <div class="shot-grid">
+          <div class="shot"><b>Скрин: онбординг шаги 1-2</b><span>Риск и инвестиционная цель</span></div>
+          <div class="shot"><b>Скрин: онбординг шаги 3-4</b><span>Опыт и стартовый капитал</span></div>
+        </div>
+
+        <h3>3) Панель управления</h3>
+        <p>Показывает стоимость портфеля, динамику и AI-инсайты.</p>
+        <div class="shot-grid">
+          <div class="shot"><b>Скрин: Dashboard (верх)</b><span>Карточки с ключевыми показателями</span></div>
+          <div class="shot"><b>Скрин: Dashboard (низ)</b><span>Графики и блок AI</span></div>
+        </div>
+
+        <h3>4) Портфель</h3>
+        <p>Здесь список активов, поиск, фильтры и прибыль/убыток по позициям.</p>
+        <div class="shot-grid">
+          <div class="shot"><b>Скрин: Портфель</b><span>Таблица активов и фильтры</span></div>
+        </div>
+
+        <h3>5) Анализ актива</h3>
+        <p>Страница детального анализа отдельного инструмента.</p>
+        <div class="shot-grid">
+          <div class="shot"><b>Скрин: Анализ актива (верх)</b><span>Цена, изменение, AI-рекомендация</span></div>
+          <div class="shot"><b>Скрин: Анализ актива (графики)</b><span>Динамика, объемы, индикаторы</span></div>
+        </div>
+
+        <h3>6) Обзор рынка</h3>
+        <p>Индексы, лидеры роста/падения, сигналы и динамика по секторам.</p>
+        <div class="shot-grid">
+          <div class="shot"><b>Скрин: Обзор рынка</b><span>Основные рыночные блоки</span></div>
+        </div>
+
+        <h3>7) AI-ассистент</h3>
+        <p>Задавайте вопросы по инвестициям и портфелю в формате чата.</p>
+        <div class="shot-grid">
+          <div class="shot"><b>Скрин: AI-ассистент</b><span>Диалог и поле ввода</span></div>
+        </div>
+
+        <h3>8) Настройки</h3>
+        <p>Управление профилем, инвестиционными параметрами и уведомлениями.</p>
+        <div class="shot-grid">
+          <div class="shot"><b>Скрин: Настройки (Profile/Investment)</b><span>Личные и инвестиционные параметры</span></div>
+          <div class="shot"><b>Скрин: Настройки (Notifications/Preferences)</b><span>Уведомления и вид интерфейса</span></div>
+        </div>
+
+        <h3>9) Тема и выход</h3>
+        <p>В боковом меню переключаются тема и выход из аккаунта.</p>
+        <div class="shot-grid">
+          <div class="shot"><b>Скрин: Боковое меню</b><span>Тема оформления и кнопка выхода</span></div>
+        </div>
+      </section>
+
+      <section id="flow">
+        <h2>Рекомендуемый сценарий работы</h2>
+        <ol>
+          <li>Вход в аккаунт.</li>
+          <li>Онбординг (один раз).</li>
+          <li>Просмотр панели управления.</li>
+          <li>Проверка раздела «Портфель».</li>
+          <li>Анализ интересующего актива.</li>
+          <li>Просмотр общего состояния рынка.</li>
+          <li>Вопросы AI-ассистенту.</li>
+          <li>Настройка уведомлений под себя.</li>
+        </ol>
+      </section>
+
+      <section id="tips">
+        <h2>Полезные советы</h2>
+        <ul>
+          <li>Регулярно проверяйте «Панель управления» для быстрой оценки ситуации.</li>
+          <li>В «Портфеле» используйте поиск и фильтры для больших списков активов.</li>
+          <li>Сравнивайте AI-рекомендации с собственным анализом.</li>
+          <li>Включите нужные уведомления в настройках, чтобы не пропускать важные изменения.</li>
+        </ul>
+        <div class="note">AI-подсказки носят информационный характер и не заменяют самостоятельное решение пользователя.</div>
+      </section>
+
+      <section id="faq">
+        <h2>Частые вопросы</h2>
+        <h3>Не могу войти в аккаунт</h3>
+        <p>Проверьте правильность email и пароля. Если проблема сохраняется, обратитесь к администратору системы.</p>
+
+        <h3>Не вижу нужный актив</h3>
+        <p>Откройте раздел «Портфель» и воспользуйтесь поиском по тикеру или названию.</p>
+
+        <h3>AI ответил слишком общо</h3>
+        <p>Сформулируйте вопрос точнее: укажите актив, горизонт и цель (например, «оценка риска AAPL на 3 месяца»).</p>
+      </section>
+
+      <footer>
+        InvestAI • Руководство пользователя
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

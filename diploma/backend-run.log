@@ -1,0 +1,2 @@
+2026/02/15 23:37:34 backend listening on :8080
+2026/02/15 23:37:34 bybit poller enabled: base=https://api.bybit.com category=spot quote=USDT interval=30s
